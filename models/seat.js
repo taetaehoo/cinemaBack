@@ -1,4 +1,6 @@
 const { Schema, model, Types } = require("mongoose");
+const {Member} = require("../models/member");
+const {Screen} = require("../models/screen");
 const SeatSchema = new Schema(
  {
   seat_column: { type: String, required: true },

@@ -22,6 +22,7 @@ const server = async () => {
         await mongoose.connect(DB_URI);
         app.use(cors({origin: "http://localhost:3000"}));
         app.use(express.json());
+        app.use("/member", memberController);
         app.use("/movie", movieController);
         app.use("/theater", theaterController);
         app.use("/screen", screenController);

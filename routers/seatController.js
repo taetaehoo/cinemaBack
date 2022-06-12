@@ -13,6 +13,12 @@ SeatRouter.get("/:id", async (req, res) => {
         console.log(error);
         res.status(500).send({error: error.message});
     }
+});
+
+SeatRouter.post("/reserve", async (req, res) => {
+    const seat = new Seat(req.body);
+    await seat.save();
+    return res.send({seat});
 })
 
 module.exports = SeatRouter;

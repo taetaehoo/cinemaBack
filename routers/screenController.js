@@ -31,9 +31,20 @@ ScreenRouter.get("/movie/:movie", async(req, res) => {
     }
 });
 
-ScreenRouter.get("/theater/:theater", async(req, res) => {
+ScreenRouter.get("/:id", async(req, res) => {
     try {
-        const screens = await Screen.find({"theater":req.params.theater});
+        const screen = await Screen.findById(req.params.id);
+        res.send(screen);
+    }catch(error) {
+        console.log(error);
+        res.status(500).send({error: error.message});
+    }
+});
+
+ScreenRouter.post("/screen", async(req, res) => {
+    try {
+        let {movie, theater} = req.body;
+        const screens = await Screen.find({$and:[{"movie":movie},{"theater":theater}]});
         res.send(screens);
     }catch(error) {
         console.log(error);
